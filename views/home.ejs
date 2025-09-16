@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+</head>
+<body>
+   <h1>
+   URL SHORTNER 
+   <% if (typeof id !== "undefined" && id) { %>
+  <p>URL GENERATED : http://localhost:8000/url/<%= id %></p>
+<% } %>
+
+</h1>
+
+    <div>
+        <form method="post" action="/url">
+          
+            <label>ENTER YOUR ORIGINAL URL</label>
+            <input type="text" placeholder="http://google.com" name="url" />
+            <button type="submit">GENERATE</button>
+        </form>
+    </div>
+    <div>
+        <% if (locals.urls) { %>
+         <table>
+            <thead>
+                <th>S NO.</th>
+                <th>shortid</th>
+                <th>redirect</th>
+                <th>clicks</th>
+            </thead>
+            <tbody>
+                <% urls.forEach((url,index )=> { %>
+                    <tr>
+                 <td><%= index+1 %></td>
+                 <td><%=   url.shortId %></td>
+                  <td><%=   url.redirectURL %></td>
+                   <td><%=   url.visitHistory.length %></td>
+                   </tr>
+                <% }) %>
+            </tbody>
+         </table>
+        <% } %>
+    </div>
+</body>
+</html>
